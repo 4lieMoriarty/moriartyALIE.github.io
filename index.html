@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f2">
+  <meta name="description" content="A personal portfolio of professional certificates, learning milestones, and areas of expertise.">
+  <title>Developer Website —Alieson Mamangon</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1d2925;
+      --muted: #66736d;
+      --paper: #f7f7f2;
+      --surface: #fff;
+      --line: #e5e9e2;
+      --green: #2f6c53;
+      --green-dark: #24523f;
+      --mint: #e7f0e9;
+      --amber: #f3c66b;
+      --shadow: 0 18px 50px rgba(35, 55, 44, .08);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    button { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+
+    .notice {
+      padding: 9px 16px;
+      background: #20372e;
+      color: #eaf1eb;
+      text-align: center;
+      font-size: .78rem;
+      letter-spacing: .025em;
+    }
+    .notice strong { color: #f3c66b; font-weight: 650; }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: .95rem;
+      font-weight: 750;
+      letter-spacing: -.025em;
+      text-decoration: none;
+    }
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--green);
+      color: white;
+    }
+    .brand-mark svg { width: 19px; height: 19px; }
+    nav { display: flex; align-items: center; gap: 30px; }
+    nav a {
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 550;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    nav a:hover, nav a:focus-visible { color: var(--green); }
+    .nav-contact {
+      padding: 10px 16px;
+      border: 1px solid #d8e1d8;
+      border-radius: 999px;
+      color: var(--green);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 50px;
+      padding-block: 76px 70px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 18px;
+      color: var(--green);
+      font-size: .75rem;
+      font-weight: 750;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 20px;
+      height: 2px;
+      background: var(--amber);
+      content: "";
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 670px;
+      margin-bottom: 20px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.7rem, 5.7vw, 5rem);
+      font-weight: 500;
+      letter-spacing: -.055em;
+      line-height: 1.02;
+    }
+    h1 em { color: var(--green); font-weight: 500; }
+    .hero-copy {
+      max-width: 580px;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; }
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      font-size: .88rem;
+      font-weight: 650;
+      text-decoration: none;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .button:hover { transform: translateY(-1px); background: var(--green-dark); }
+    .button svg { width: 16px; height: 16px; }
+    .button.secondary { border-color: var(--line); background: transparent; color: var(--ink); }
+    .button.secondary:hover { background: white; }
+    .hero-art {
+      position: relative;
+      display: grid;
+      min-height: 310px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid #e2e9dd;
+      border-radius: 28px;
+      background:
+        radial-gradient(ellipse at 75% 25%, rgba(243, 198, 107, .36), transparent 27%),
+        radial-gradient(ellipse at 15% 85%, rgba(93, 145, 112, .18), transparent 34%),
+        #edf2e9;
+    }
+    .hero-art::before, .hero-art::after {
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border: 1px solid rgba(47, 108, 83, .13);
+      border-radius: 50%;
+      content: "";
+    }
+    .hero-art::after { width: 250px; height: 250px; }
+    .certificate-preview {
+      position: relative;
+      z-index: 1;
+      width: min(75%, 300px);
+      padding: 27px 25px 23px;
+      transform: rotate(-4deg);
+      border: 1px solid #e5e5d8;
+      background: #fffdf6;
+      box-shadow: 0 20px 42px rgba(31, 54, 41, .16);
+      text-align: center;
+    }
+    .preview-kicker { color: var(--green); font-size: .56rem; font-weight: 800; letter-spacing: .18em; }
+    .preview-rule { width: 33px; height: 2px; margin: 13px auto; background: var(--amber); }
+    .preview-title { margin: 0 0 4px; font-family: Georgia, serif; font-size: 1.5rem; line-height: 1.1; }
+    .preview-subtitle { margin: 0; color: var(--muted); font-size: .67rem; }
+    .preview-seal {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      margin: 19px auto 0;
+      place-items: center;
+      border: 1px solid #c6d6c8;
+      border-radius: 50%;
+      color: var(--green);
+    }
+    .preview-seal svg { width: 21px; height: 21px; }
+    .floating-note {
+      position: absolute;
+      right: 5%;
+      bottom: 12%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+      box-shadow: var(--shadow);
+      font-size: .72rem;
+      font-weight: 650;
+    }
+    .floating-note span { color: var(--green); font-size: 1rem; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      margin-bottom: 86px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.6);
+    }
+    .stat { padding: 19px 24px; text-align: center; }
+    .stat + .stat { border-left: 1px solid var(--line); }
+    .stat strong { display: block; font-family: Georgia, serif; font-size: 1.65rem; font-weight: 500; }
+    .stat span { color: var(--muted); font-size: .78rem; }
+
+    .section { padding-bottom: 90px; }
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 27px;
+    }
+    .section-heading .eyebrow { margin-bottom: 10px; }
+    h2 {
+      margin-bottom: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 500;
+      letter-spacing: -.04em;
+      line-height: 1.1;
+    }
+    .section-intro { max-width: 450px; margin: 10px 0 0; color: var(--muted); font-size: .91rem; }
+    .controls { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 23px; }
+    .filter {
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: .79rem;
+      transition: all .2s ease;
+    }
+    .filter:hover { border-color: #b8cbbd; color: var(--green); }
+    .filter[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: white; }
+    .search {
+      display: flex;
+      width: min(280px, 100%);
+      align-items: center;
+      gap: 9px;
+      margin-left: auto;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: white;
+    }
+    .search svg { width: 17px; height: 17px; flex: 0 0 auto; color: #78847c; }
+    .search input { width: 100%; min-width: 0; padding: 9px 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: .8rem; }
+    .search:focus-within { outline: 2px solid #b8d1be; outline-offset: 2px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 19px; }
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      background: var(--surface);
+      box-shadow: 0 4px 15px rgba(35, 55, 44, .025);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .card-art {
+      position: relative;
+      display: flex;
+      min-height: 137px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--mint);
+    }
+    .card-art::before, .card-art::after {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border: 1px solid rgba(47, 108, 83, .14);
+      border-radius: 50%;
+      content: "";
+    }
+    .card-art::after { width: 110px; height: 110px; }
+    .card-art[data-tone="blue"] { background: #e9eff2; }
+    .card-art[data-tone="blue"]::before, .card-art[data-tone="blue"]::after { border-color: rgba(66, 99, 119, .15); }
+    .card-art[data-tone="gold"] { background: #f5efdf; }
+    .card-art[data-tone="gold"]::before, .card-art[data-tone="gold"]::after { border-color: rgba(144, 110, 40, .16); }
+    .card-art[data-tone="rose"] { background: #f3eae5; }
+    .card-art[data-tone="rose"]::before, .card-art[data-tone="rose"]::after { border-color: rgba(133, 80, 63, .13); }
+    .card-art[data-tone="lilac"] { background: #efedf4; }
+    .card-art[data-tone="lilac"]::before, .card-art[data-tone="lilac"]::after { border-color: rgba(99, 82, 132, .14); }
+    .card-art[data-tone="mint"] { background: #e7f0e9; }
+    .mini-certificate {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      width: min(70%, 220px);
+      height: 82px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 20px;
+      transform: rotate(-5deg);
+      border: 1px solid rgba(82, 102, 86, .2);
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 8px 18px rgba(30, 50, 38, .11);
+    }
+    .mini-certificate img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .card-content { padding: 17px 18px 18px; }
+    .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 9px; }
+    .tag { color: var(--green); font-size: .67rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+    .year { color: #879189; font-size: .73rem; }
+    .card h3 { margin-bottom: 4px; font-size: 1rem; letter-spacing: -.02em; line-height: 1.35; }
+    .issuer { margin-bottom: 15px; color: var(--muted); font-size: .8rem; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 13px; border-top: 1px solid #edf0eb; }
+    .credential { overflow: hidden; color: #89938c; font-size: .69rem; text-overflow: ellipsis; white-space: nowrap; }
+    .details-button {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 0 3px 8px;
+      border: 0;
+      background: none;
+      color: var(--green);
+      cursor: pointer;
+      font-size: .74rem;
+      font-weight: 700;
+    }
+    .details-button:hover { color: var(--green-dark); }
+    .details-button svg { width: 14px; height: 14px; }
+    .empty-state { grid-column: 1 / -1; padding: 42px 20px; border: 1px dashed #cfd8cf; border-radius: 16px; color: var(--muted); text-align: center; }
+
+    .about {
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      align-items: start;
+      gap: 70px;
+      padding: 35px;
+      border: 1px solid #e5e9e2;
+      border-radius: 22px;
+      background: #eef2eb;
+    }
+    .about h2 { font-size: clamp(1.9rem, 3vw, 2.6rem); }
+    .about-copy { color: #58665d; font-size: .92rem; }
+    .about-copy p:last-child { margin-bottom: 0; }
+    .skills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 19px; }
+    .skill { padding: 7px 11px; border: 1px solid #d6e0d6; border-radius: 999px; color: #45634f; font-size: .74rem; font-weight: 600; }
+
+    .contact {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 70px;
+      padding: 29px 32px;
+      border-radius: 20px;
+      background: #223a30;
+      color: white;
+    }
+    .contact h2 { margin-bottom: 6px; font-size: 1.75rem; }
+    .contact p { margin-bottom: 0; color: #c2d0c6; font-size: .87rem; }
+    .contact .button { flex: 0 0 auto; background: #f3c66b; color: #27362d; }
+    .contact .button:hover { background: #f8d48b; }
+    footer { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 20px 26px; border-top: 1px solid var(--line); color: #7c8780; font-size: .74rem; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--green); }
+
+    dialog {
+      width: min(470px, calc(100% - 32px));
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: white;
+      color: var(--ink);
+      box-shadow: 0 22px 70px rgba(20, 35, 28, .25);
+    }
+    dialog::backdrop { background: rgba(20, 35, 28, .48); backdrop-filter: blur(3px); }
+    .dialog-content { padding: 26px; }
+    .dialog-top { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+    .dialog-top h2 { font-size: 1.7rem; }
+    .close-dialog { display: grid; width: 34px; height: 34px; flex: 0 0 auto; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: white; cursor: pointer; }
+    .close-dialog svg { width: 16px; height: 16px; }
+    .dialog-category { margin-bottom: 8px; color: var(--green); font-size: .7rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+    .dialog-issuer { margin: -12px 0 20px; color: var(--muted); font-size: .9rem; }
+    .dialog-description { color: #536159; font-size: .9rem; }
+    .dialog-info { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 22px 0; padding-block: 16px; border-block: 1px solid var(--line); }
+    .dialog-info span { display: block; color: #89938c; font-size: .7rem; }
+    .dialog-info strong { display: block; margin-top: 3px; font-size: .82rem; }
+    .dialog-link { display: inline-flex; align-items: center; gap: 7px; color: var(--green); font-size: .85rem; font-weight: 700; text-decoration: none; }
+    .dialog-link svg { width: 15px; height: 15px; }
+
+    :focus-visible { outline: 3px solid #83ad8d; outline-offset: 3px; }
+    @media (max-width: 820px) {
+      .hero { grid-template-columns: 1fr .75fr; gap: 24px; padding-block: 60px; }
+      .hero-art { min-height: 270px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .about { grid-template-columns: 1fr; gap: 22px; }
+    }
+    @media (max-width: 600px) {
+      .wrap { width: min(100% - 32px, 1120px); }
+      header { min-height: 68px; }
+      nav { gap: 13px; }
+      nav a { font-size: .78rem; }
+      nav a:first-child { display: none; }
+      .nav-contact { padding: 8px 12px; }
+      .hero { grid-template-columns: 1fr; gap: 30px; padding-block: 47px 40px; }
+      h1 { font-size: clamp(2.8rem, 13vw, 4.1rem); }
+      .hero-art { min-height: 245px; }
+      .stats { margin-bottom: 65px; }
+      .stat { padding: 14px 7px; }
+      .stat strong { font-size: 1.35rem; }
+      .stat span { font-size: .66rem; }
+      .section { padding-bottom: 68px; }
+      .section-heading { display: block; }
+      .controls { gap: 7px; }
+      .search { width: 100%; margin: 5px 0 0; }
+      .grid { grid-template-columns: 1fr; gap: 14px; }
+      .card-art { min-height: 125px; }
+      .about { padding: 24px 20px; }
+      .contact { align-items: start; flex-direction: column; padding: 25px 22px; }
+      footer { align-items: start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#" aria-label="Alieson Mamangon home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h9l5 5v10H5z"/><path d="M14 4.5v5h5M8.5 14h7M8.5 17h5"/></svg>
+        </span>
+        <span>Alieson Mamangon</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#certificates">Certificates</a>
+        <a href="#about">About</a>
+        <a class="nav-contact" href="#contact">Get in touch <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="intro-title">
+        <div>
+          <p class="eyebrow">My learning journey</p>
+          <h1 id="intro-title">A long journey.<br><em>One step at a time.</em></h1>
+          <p class="hero-copy">Hi, I'm Alieson Mamangon — a lifelong learner building practical skills and turning new ideas into meaningful work. Here's a little of what I've been learning lately.</p>
+          <div class="hero-actions">
+            <a class="button" href="#certificates">Explore certificates
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            </a>
+            <a class="button secondary" href="#about">A little about me</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a certificate">
+          <div class="certificate-preview">
+            <div class="preview-kicker">CERTIFICATE OF COMPLETION</div>
+            <div class="preview-rule"></div>
+            <p class="preview-title">Certified<br>sa imong heart </p>
+            <p class="preview-subtitle">HAhAHHAHHA.</p>
+            <div class="preview-seal" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m9 13-1 8 4-2 4 2-1-8"/></svg>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="Portfolio summary">
+        <div class="stat"><strong id="stat-count">17</strong><span>Certificates Earned</span></div>
+        <div class="stat"><strong>04</strong><span>Learning areas</span></div>
+        <div class="stat"><strong>2024–26</strong><span>Learning since</span></div>
+      </section>
+
+      <section class="section" id="certificates" aria-labelledby="certificates-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Proof of progress</p>
+            <h2 id="certificates-title">Certificates &amp; courses</h2>
+            <p class="section-intro">A collection of programs, courses, and milestones that have shaped the way I work.</p>
+          </div>
+        </div>
+        <div class="controls" role="group" aria-label="Filter certificates">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All learning</button>
+          <button class="filter" type="button" data-filter="technology" aria-pressed="false">Technology</button>
+          <button class="filter" type="button" data-filter="slime" aria-pressed="false">Slime</button>
+          <label class="search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+            <input id="certificate-search" type="search" placeholder="Search certificates" aria-label="Search certificates">
+          </label>
+        </div>
+        <div class="grid" id="certificate-grid" aria-live="polite"></div>
+      </section>
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div>
+          <h2 id="contact-title">Let's keep the conversation going.</h2>
+          <p>Have a question or an opportunity to share? I'd love to hear from you.</p>
+        </div>
+        <a class="button" href="mailto:mamangonalieson@gmail.com">Say hello <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="current-year"></span> Alieson Mamangon. Made for curious minds.</span>
+      <a href="#certificates">Back to certificates ↑</a>
+    </footer>
+  </div>
+
+  <dialog id="certificate-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-content">
+      <div class="dialog-top">
+        <div>
+          <div class="dialog-category" id="dialog-category"></div>
+          <h2 id="dialog-title"></h2>
+        </div>
+        <button class="close-dialog" type="button" aria-label="Close certificate details">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <p class="dialog-issuer" id="dialog-issuer"></p>
+      <p class="dialog-description" id="dialog-description"></p>
+      <div class="dialog-info">
+        <div><span>Completed</span><strong id="dialog-year"></strong></div>
+        <div><span>Credential ID</span><strong id="dialog-credential"></strong></div>
+      </div>
+      <a class="dialog-link" id="dialog-link" href="#" target="_blank" rel="noreferrer">
+        View credential
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg>
+      </a>
+    </div>
+  </dialog>
+
+  <script>
+    const certificates = [
+      {
+        title: "Microsoft Cybersecurity Course: Security, Compliance, and Identity Fundamentals",
+        issuer: "TESDA Online Program",
+        category: "technology",
+        categoryLabel: "Technology",
+        year: "2026",
+        credential: "1mcbN3bthX",
+        tone: "rose",
+        description: "A comprehensive overview of cybersecurity principles, compliance requirements, and identity management concepts.",
+        url: "https://e-tesda.gov.ph/mod/customcert/view.php?id=82883&downloadown=1"
+      },
+      {
+        title: "Microsoft Artificial Intelligence Course: Azure AI Fundamentals",
+        issuer: "TESDA Online Program",
+        category: "technology",
+        categoryLabel: "Technology",
+        year: "2026",
+        credential: "DqCn2iUup2",
+        tone: "blue",
+        description: "An introduction to artificial intelligence concepts and the fundamentals of Azure AI services.",
+        url: "https://e-tesda.gov.ph/mod/customcert/view.php?id=78019&downloadown=1"
+      },
+      {
+        title: "Introduction to Computer Systems Servicing",
+        issuer: "TESDA Online Program",
+        category: "ttechnology",
+        categoryLabel: "Technology",
+        year: "2026",
+        credential: "0egf9Zs9hS",
+        tone: "gold",
+        description: "A foundational course in computer systems servicing, covering hardware, software, and troubleshooting techniques.",
+        url: "https://e-tesda.gov.ph/mod/customcert/view.php?id=41351&downloadown=1"
+      },
+      {
+        title: "Installing and Configuring Computer Systems",
+        issuer: "TESDA Online Program",
+        category: "technology",
+        categoryLabel: "Technology",
+        year: "2026",
+        credential: "CDOMCBVFHG",
+        tone: "mint",
+        description: "A course on installing and configuring computer systems, including hardware setup and software installation.",
+        url: "https://e-tesda.gov.ph/mod/customcert/view.php?id=41354&downloadown=1"
+      },
+      {
+        title: "Setting Up Computer Networks",
+        issuer: "TESDA Online Program",
+        category: "technology",
+        categoryLabel: "Technology",
+        year: "2026",
+        credential: "CZ8tHWGpuY",
+        tone: "lilac",
+        description: "A course on setting up and managing computer networks, including network design and troubleshooting.",
+        url: "https://e-tesda.gov.ph/mod/customcert/view.php?id=41355&downloadown=1"
+      },
+      {
+        title: "Setting Up Computer Servers",
+        issuer: "TESDA Online Program",
+        category: "technology",
+        categoryLabel: "Technology",
+        year: "2026",
+        credential: "M0esphTXCF",
+        tone: "rose",
+        description: "A course on setting up and configuring computer servers, including server installation and management.",
+        url: "https://e-tesda.gov.ph/mod/customcert/view.php?id=41356&downloadown=1"
+      },
+       {
+        title: "Maintaining Computer Systems and Networks",
+        issuer: "TESDA Online Program",
+        category: "technology",
+        categoryLabel: "Technology",
+        year: "2026",
+        credential: "cxsPI7RNsl",
+        tone: "rose",
+        description: "A course on maintaining and troubleshooting computer systems and networks.",
+        url: "https://e-tesda.gov.ph/mod/customcert/view.php?id=41359&downloadown=1"
+      },
+           {
+        title: "Slime",
+        issuer: "Extra Chromosome",
+        category: "slime",
+        categoryLabel: "Slime",
+        year: "1974",
+        credential: "⸸ 𝔰𝔩𝔦𝔪𝔢 ⸸",
+        tone: "rose",
+        description: "Slime.",
+        url: "https://th.bing.com/th/id/OIP.tZDpBnFskBUyNBoR7X4jDQHaLO?w=132&h=198&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+      }
+    ];
+
+    const grid = document.querySelector("#certificate-grid");
+    const search = document.querySelector("#certificate-search");
+    const filters = [...document.querySelectorAll(".filter")];
+    const dialog = document.querySelector("#certificate-dialog");
+    let activeFilter = "all";
+
+    function createCertificateCard(certificate, index) {
+      const card = document.createElement("article");
+      card.className = "card";
+      const art = document.createElement("div");
+      art.className = "card-art";
+      art.dataset.tone = certificate.tone;
+      art.setAttribute("aria-hidden", "true");
+      const certificatePreview = document.createElement("div");
+      certificatePreview.className = "mini-certificate";
+      const logo = document.createElement("img");
+      logo.src = "https://toppng.com/uploads/preview/deped-logo-tesda-logo-115629236021pujwsdy72.png";
+      logo.alt = "DepEd and TESDA logos";
+      certificatePreview.append(logo);
+      art.append(certificatePreview);
+
+      const content = document.createElement("div");
+      content.className = "card-content";
+      const meta = document.createElement("div");
+      meta.className = "card-meta";
+      const tag = document.createElement("span");
+      tag.className = "tag";
+      tag.textContent = certificate.categoryLabel;
+      const year = document.createElement("span");
+      year.className = "year";
+      year.textContent = certificate.year;
+      meta.append(tag, year);
+
+      const title = document.createElement("h3");
+      title.textContent = certificate.title;
+      const issuer = document.createElement("p");
+      issuer.className = "issuer";
+      issuer.textContent = certificate.issuer;
+
+      const footer = document.createElement("div");
+      footer.className = "card-footer";
+      const credential = document.createElement("span");
+      credential.className = "credential";
+      credential.textContent = `ID: ${certificate.credential}`;
+      const details = document.createElement("button");
+      details.className = "details-button";
+      details.type = "button";
+      details.dataset.index = String(index);
+      details.setAttribute("aria-label", `View details for ${certificate.title}`);
+      details.innerHTML = 'Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+      footer.append(credential, details);
+      content.append(meta, title, issuer, footer);
+      card.append(art, content);
+      return card;
+    }
+
+    function renderCertificates() {
+      const query = search.value.trim().toLowerCase();
+      const matches = certificates
+        .map((certificate, index) => ({ certificate, index }))
+        .filter(({ certificate }) => {
+          const matchesCategory = activeFilter === "all" || certificate.category === activeFilter;
+          const searchableText = `${certificate.title} ${certificate.issuer} ${certificate.categoryLabel} ${certificate.year}`.toLowerCase();
+          return matchesCategory && searchableText.includes(query);
+        });
+
+      grid.replaceChildren();
+      if (matches.length === 0) {
+        const empty = document.createElement("p");
+        empty.className = "empty-state";
+        empty.textContent = "No certificates match your search. Try another term or category.";
+        grid.append(empty);
+      } else {
+        matches.forEach(({ certificate, index }) => grid.append(createCertificateCard(certificate, index)));
+      }
+    }
+
+    filters.forEach((filter) => {
+      filter.addEventListener("click", () => {
+        activeFilter = filter.dataset.filter;
+        filters.forEach((button) => button.setAttribute("aria-pressed", String(button === filter)));
+        renderCertificates();
+      });
+    });
+    search.addEventListener("input", renderCertificates);
+
+    grid.addEventListener("click", (event) => {
+      const button = event.target.closest(".details-button");
+      if (!button) return;
+      const certificate = certificates[Number(button.dataset.index)];
+      document.querySelector("#dialog-category").textContent = certificate.categoryLabel;
+      document.querySelector("#dialog-title").textContent = certificate.title;
+      document.querySelector("#dialog-issuer").textContent = certificate.issuer;
+      document.querySelector("#dialog-description").textContent = certificate.description;
+      document.querySelector("#dialog-year").textContent = certificate.year;
+      document.querySelector("#dialog-credential").textContent = certificate.credential;
+      document.querySelector("#dialog-link").href = certificate.url;
+      dialog.showModal();
+    });
+
+    document.querySelector(".close-dialog").addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    document.querySelector("#current-year").textContent = String(new Date().getFullYear());
+    document.querySelector("#stat-count").textContent = String(certificates.length).padStart(2, "0");
+    renderCertificates();
+  </script>
+</body>
+</html>
